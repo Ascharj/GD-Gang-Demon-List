@@ -1,0 +1,405 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+  #pc-root {
+    --color-ok-bg: rgb(238, 255, 228);
+    --color-ok-text: #074d07;
+    --color-error-bg: #fdd;
+    --color-error-text: #4d0707;
+    --color-text: #444446;
+    --color-border: lightgray;
+    --color-bg: white;
+    --color-link-dark: #f77e39;
+    --color-pc-button-bg: #0881c6;
+    --color-pc-button-bg-hover: #076696;
+    --color-imp-button-bg: #ff003c;
+    --color-imp-button-bg-hover: #ff2457;
+    --color-unobstrusive-button-bg: var(--color-bg);
+    --color-unobstrusive-button-bg-hover: #ddd;
+    --color-unobstrusive-button-text: var(--color-text);
+    font-family: "Montserrat", sans-serif;
+    color: var(--color-text);
+    background: var(--color-bg);
+  }
+  #pc-root * { box-sizing: border-box; }
+  #pc-root h1, #pc-root h2, #pc-root h3, #pc-root h4 { text-align: center; }
+  #pc-root a { text-decoration: none; cursor: pointer; color: inherit; }
+
+  #pc-root header nav {
+    width: 100%; display: flex; align-items: center;
+    background: var(--color-bg); font-size: 1.2em; font-weight: 600;
+    border-bottom: 1px solid var(--color-border); padding: 0 24px; height: 70px;
+  }
+  #pc-root .nav-brand { display: flex; flex-direction: column; line-height: 1.1; }
+  #pc-root .nav-brand .small { font-size: 0.45em; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; }
+  #pc-root .nav-brand .big { font-size: 0.8em; font-weight: 700; letter-spacing: 1px; }
+  #pc-root .nav-count { margin-left: auto; font-size: 0.6em; font-weight: 400; color: #888; }
+
+  #pc-root .m-center-wrap { display: flex; justify-content: center; }
+  #pc-root .container { max-width: 1072px; display: flex; flex-wrap: nowrap; width: 100%; padding: 20px 10px 60px 10px; }
+  @media (max-width: 1071px) {
+    #pc-root .container { flex-wrap: wrap; }
+    #pc-root .left, #pc-root .right { max-width: 100%; min-width: 100%; }
+  }
+  #pc-root .flex { display: flex; justify-content: flex-start; position: relative; max-width: 100%; flex-flow: row nowrap; }
+  #pc-root .flex.col { flex-direction: column; }
+  @media (max-width: 767px) { #pc-root .flex.mobile-col { flex-direction: column; } }
+
+  #pc-root .left { max-width: 70%; flex-grow: 1; }
+  #pc-root .right { max-width: 30%; min-width: 280px; align-items: flex-start; }
+
+  #pc-root .panel { padding: 20px; margin: 0 0 20px 0; text-align: center; position: relative; background: var(--color-bg); flex-grow: 1; overflow: hidden; }
+  #pc-root .fade { box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1); border: 1px lightgray dashed; }
+
+  #pc-root .demon-panel { align-items: center; }
+  #pc-root .thumb { background: black; background-size: cover; background-position: center; display: block; position: relative; }
+  @media (max-width: 767px) { #pc-root .thumb { width: 100%; padding-top: 56.25%; } }
+  @media (min-width: 768px) { #pc-root .thumb { max-width: 30%; min-width: 30%; padding-top: 16.875%; } }
+  #pc-root .thumb .play-glyph { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: rgba(255,255,255,0.85); font-size: 2em; }
+  #pc-root .demon-info { text-align: left; padding-left: 15px; flex-grow: 1; }
+  #pc-root .demon-byline h2 { text-align: left; margin: 0 0 2px 0; font-size: 1.3em; }
+  #pc-root .demon-byline h3 { text-align: left; margin: 0 0 4px 0; font-weight: 400; font-size: 0.95em; color: #666; }
+  #pc-root .demon-meta { font-size: 0.8em; color: #777; }
+  #pc-root .demon-actions { display: flex; gap: 8px; margin-left: auto; padding-left: 10px; }
+
+  #pc-root .button { padding: 8px 14px; border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; font-family: inherit; font-weight: 600; font-size: 0.8em; }
+  #pc-root .button.blue { background-color: var(--color-pc-button-bg); color: white; }
+  #pc-root .button.blue:hover { background-color: var(--color-pc-button-bg-hover); }
+  #pc-root .button.red { background: var(--color-imp-button-bg); color: white; }
+  #pc-root .button.red:hover { background: var(--color-imp-button-bg-hover); }
+  #pc-root .button.white { background-color: var(--color-unobstrusive-button-bg); color: var(--color-unobstrusive-button-text); border: 1px solid var(--color-border); }
+  #pc-root .button.white:hover { background-color: var(--color-unobstrusive-button-bg-hover); }
+  #pc-root .button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  #pc-root .form-input { display: flex; flex-direction: column; margin: 10px 0; text-align: left; }
+  #pc-root .form-input label { font-size: 0.75em; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+  #pc-root input[type="text"], #pc-root input[type="number"], #pc-root input[type="url"], #pc-root input[type="date"], #pc-root input[type="file"] {
+    border: none; border-bottom: 1px solid var(--color-border); color: var(--color-text);
+    font-family: inherit; font-size: 1em; padding: 4px 2px; background: var(--color-bg); height: 2em;
+  }
+  #pc-root input:focus { outline: none; border-bottom: 1px solid var(--color-pc-button-bg); }
+  #pc-root input:required:invalid { border-bottom: 1px solid var(--color-link-dark); }
+
+  #pc-root .info-panel p { font-size: 0.85em; line-height: 1.5; text-align: left; }
+  #pc-root .info-panel h2 { font-size: 1.1em; text-transform: uppercase; letter-spacing: 1px; }
+
+  #pc-root .status-msg { font-size: 0.8em; margin-top: 8px; min-height: 1.2em; text-align: left; }
+  #pc-root .status-msg.ok { color: var(--color-ok-text); }
+  #pc-root .status-msg.err { color: var(--color-error-text); }
+
+  #pc-root .empty-state { padding: 40px 20px; text-align: center; color: #888; border: 1px dashed var(--color-border); }
+  #pc-root .thumb-preview { width: 100%; max-height: 100px; object-fit: cover; margin-top: 6px; display: none; }
+
+  #pc-root footer { display: flex; flex-direction: column; align-items: center; padding: 20px; font-size: 0.75em; font-weight: 300; text-align: center; background: #171921; color: #ddd; }
+  #pc-root footer a { color: var(--color-link-dark); }
+</style>
+
+<div id="pc-root">
+  <header>
+    <nav>
+      <div class="nav-brand">
+        <span class="small">Geometry Dash</span>
+        <span class="big">THE GD GANG DEMON LIST</span>
+      </div>
+      <div class="nav-count" id="pc-count"></div>
+    </nav>
+  </header>
+
+  <div class="m-center-wrap">
+    <div class="container flex">
+      <main class="left" id="pc-list">
+        <div class="empty-state">Loading list…</div>
+      </main>
+
+      <aside class="right flex col">
+        <section class="panel fade info-panel">
+          <h2>About this list</h2>
+          <p>Every entry here is a demon one of us has actually beaten. Ranked by position &mdash; whatever we've decided is hardest sits at #1.</p>
+          <p style="font-size:0.75em;color:#999">This list is shared: anyone with this link can see and add to it.</p>
+        </section>
+
+        <section class="panel fade" id="pc-form-panel">
+          <h2 id="pc-form-title" style="font-size:1.1em;text-transform:uppercase;letter-spacing:1px">Submit a Beat</h2>
+          <form id="pc-form">
+            <div class="form-input">
+              <label for="pc-name">Demon</label>
+              <input type="text" id="pc-name" placeholder="e.g. Tidal Wave" required>
+            </div>
+            <div class="form-input">
+              <label for="pc-holder">Beaten by</label>
+              <input type="text" id="pc-holder" placeholder="e.g. Ascharj" required>
+            </div>
+            <div class="form-input">
+              <label for="pc-position">Position</label>
+              <input type="number" id="pc-position" min="1" step="1" placeholder="e.g. 1" required>
+            </div>
+            <div class="form-input">
+              <label for="pc-date">Date completed</label>
+              <input type="date" id="pc-date">
+            </div>
+            <div class="form-input">
+              <label for="pc-video">Video link</label>
+              <input type="url" id="pc-video" placeholder="https://youtube.com/watch?v=...">
+            </div>
+            <div class="form-input">
+              <label for="pc-image-url">Image URL (optional, overrides video thumbnail)</label>
+              <input type="url" id="pc-image-url" placeholder="https://...">
+            </div>
+            <div class="form-input">
+              <label for="pc-image-file">...or upload an image (optional)</label>
+              <input type="file" id="pc-image-file" accept="image/*">
+              <img id="pc-thumb-preview" class="thumb-preview">
+            </div>
+            <div class="flex" style="gap:8px; margin-top: 10px">
+              <button type="submit" class="button blue" id="pc-submit-btn" style="flex-grow:1">Add to list</button>
+              <button type="button" class="button white" id="pc-cancel-btn" style="display:none">Cancel</button>
+            </div>
+            <div class="status-msg" id="pc-status"></div>
+          </form>
+        </section>
+      </aside>
+    </div>
+  </div>
+
+  <footer>
+    <div>OUR DEMONLIST &mdash; not affiliated with RobTopGamesAB® or the real pointercrate.com</div>
+  </footer>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+  import {
+    getFirestore, collection, onSnapshot, doc,
+    writeBatch, deleteDoc
+  } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
+  // ====== PASTE YOUR FIREBASE CONFIG HERE ======
+  const firebaseConfig = {
+    apiKey: "AIzaSyDRGa0D6vZS9Gu--2HF5Af3Vy8zmp2BGmo",
+    authDomain: "the-gd-gang-demon-list.firebaseapp.com",
+    projectId: "the-gd-gang-demon-list",
+    storageBucket: "the-gd-gang-demon-list.firebasestorage.app",
+    messagingSenderId: "243682535462",
+    appId: "1:243682535462:web:4bcf59dd2cd20ec73b1ee7"
+  };
+  // ==============================================
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const beatsCol = collection(db, 'beats');
+
+  let beats = [];
+  let editingId = null;
+  let pendingImageData = null;
+
+  const listEl = document.getElementById('pc-list');
+  const countEl = document.getElementById('pc-count');
+  const form = document.getElementById('pc-form');
+  const statusEl = document.getElementById('pc-status');
+  const submitBtn = document.getElementById('pc-submit-btn');
+  const cancelBtn = document.getElementById('pc-cancel-btn');
+  const formTitle = document.getElementById('pc-form-title');
+
+  const nameInput = document.getElementById('pc-name');
+  const holderInput = document.getElementById('pc-holder');
+  const positionInput = document.getElementById('pc-position');
+  const dateInput = document.getElementById('pc-date');
+  const videoInput = document.getElementById('pc-video');
+  const imageUrlInput = document.getElementById('pc-image-url');
+  const imageFileInput = document.getElementById('pc-image-file');
+  const thumbPreview = document.getElementById('pc-thumb-preview');
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function youtubeId(url) {
+    if (!url) return null;
+    const m = url.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=|youtube\.com\/embed\/)([\w-]+)/);
+    return m ? m[1] : null;
+  }
+
+  function thumbnailFor(beat) {
+    if (beat.imageData) return beat.imageData;
+    const yid = youtubeId(beat.video);
+    if (yid) return 'https://img.youtube.com/vi/' + yid + '/hqdefault.jpg';
+    return null;
+  }
+
+  function setStatus(msg, type) {
+    statusEl.textContent = msg || '';
+    statusEl.className = 'status-msg' + (type ? ' ' + type : '');
+  }
+
+  // Live sync: any change anyone makes (add/edit/delete) updates everyone's
+  // view automatically, no refresh needed.
+  listEl.innerHTML = '<div class="empty-state">Loading list…</div>';
+  onSnapshot(beatsCol, function(snapshot) {
+    beats = snapshot.docs.map(function(d) { return Object.assign({ id: d.id }, d.data()); });
+    render();
+  }, function(err) {
+    console.error('listener failed', err);
+    setStatus('Could not connect to the database: ' + err.message, 'err');
+  });
+
+  function render() {
+    countEl.textContent = beats.length + (beats.length === 1 ? ' beat' : ' beats');
+    if (beats.length === 0) {
+      listEl.innerHTML = '<div class="empty-state">No beats logged yet. Add the first one on the right.</div>';
+      return;
+    }
+    const sorted = [...beats].sort((a,b) => (a.position||999999) - (b.position||999999));
+    listEl.innerHTML = sorted.map(function(b) {
+      const thumb = thumbnailFor(b);
+      const dateStr = b.date ? new Date(b.date + 'T00:00:00').toLocaleDateString(undefined, {year:'numeric', month:'short', day:'numeric'}) : null;
+      const thumbStyle = thumb ? 'background-image: url(\'' + thumb.replace(/'/g,"%27") + '\')' : '';
+      const thumbInner = thumb ? (b.video ? '<span class="play-glyph"><i class="fa-solid fa-circle-play"></i></span>' : '') : '<span class="play-glyph"><i class="fa-solid fa-image" style="opacity:0.4"></i></span>';
+      const thumbTag = b.video
+        ? '<a class="thumb" href="' + escapeHtml(b.video) + '" target="_blank" rel="noopener" style="' + thumbStyle + '">' + thumbInner + '</a>'
+        : '<div class="thumb" style="' + thumbStyle + '">' + thumbInner + '</div>';
+
+      return '<section class="panel fade flex mobile-col demon-panel" data-id="' + b.id + '">' +
+        thumbTag +
+        '<div class="demon-info demon-byline">' +
+          '<h2>#' + (b.position != null ? b.position : '?') + (b.video ? ' &ndash; <a href="' + escapeHtml(b.video) + '" target="_blank" rel="noopener">' + escapeHtml(b.name) + '</a>' : ' &ndash; ' + escapeHtml(b.name)) + '</h2>' +
+          '<h3>beaten by ' + escapeHtml(b.holder) + '</h3>' +
+          '<div class="demon-meta">' + (dateStr ? dateStr : 'no date recorded') + '</div>' +
+        '</div>' +
+        '<div class="demon-actions">' +
+          '<button class="button white" data-action="edit" title="Edit"><i class="fa-solid fa-pen"></i></button>' +
+          '<button class="button red" data-action="delete" title="Delete"><i class="fa-solid fa-trash"></i></button>' +
+        '</div>' +
+      '</section>';
+    }).join('');
+  }
+
+  listEl.addEventListener('click', function(e) {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    const panel = e.target.closest('.demon-panel');
+    const id = panel.getAttribute('data-id');
+    const beat = beats.find(function(b){ return String(b.id) === String(id); });
+    if (!beat) return;
+    if (btn.getAttribute('data-action') === 'edit') startEdit(beat);
+    if (btn.getAttribute('data-action') === 'delete') deleteBeat(id);
+  });
+
+  function startEdit(beat) {
+    editingId = beat.id;
+    nameInput.value = beat.name || '';
+    holderInput.value = beat.holder || '';
+    positionInput.value = beat.position != null ? beat.position : '';
+    dateInput.value = beat.date || '';
+    videoInput.value = beat.video || '';
+    imageUrlInput.value = beat.imageUrl || '';
+    pendingImageData = beat.imageData || null;
+    if (pendingImageData) { thumbPreview.src = pendingImageData; thumbPreview.style.display = 'block'; }
+    else { thumbPreview.style.display = 'none'; }
+    formTitle.textContent = 'Edit Beat';
+    submitBtn.textContent = 'Save changes';
+    cancelBtn.style.display = 'flex';
+    setStatus('');
+    document.getElementById('pc-form-panel').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function resetForm() {
+    editingId = null;
+    form.reset();
+    pendingImageData = null;
+    thumbPreview.style.display = 'none';
+    formTitle.textContent = 'Submit a Beat';
+    submitBtn.textContent = 'Add to list';
+    cancelBtn.style.display = 'none';
+  }
+
+  cancelBtn.addEventListener('click', function() { resetForm(); setStatus(''); });
+
+  imageFileInput.addEventListener('change', function() {
+    const file = imageFileInput.files[0];
+    if (!file) return;
+    if (file.size > 1024 * 1024) {
+      setStatus('Image too large — use one under 1MB, or paste an image URL instead.', 'err');
+      imageFileInput.value = '';
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = function() {
+      pendingImageData = reader.result;
+      thumbPreview.src = pendingImageData;
+      thumbPreview.style.display = 'block';
+      setStatus('');
+    };
+    reader.readAsDataURL(file);
+  });
+
+  async function deleteBeat(id) {
+    if (!confirm('Remove this beat from the list?')) return;
+    try {
+      await deleteDoc(doc(db, 'beats', id));
+      // no local mutation needed — onSnapshot will update the view
+    } catch (e) {
+      console.error('delete failed', e);
+      setStatus('Delete failed: ' + e.message, 'err');
+    }
+  }
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const name = nameInput.value.trim();
+    const holder = holderInput.value.trim();
+    const position = parseInt(positionInput.value, 10);
+    if (!name || !holder || !position) {
+      setStatus('Demon, holder, and position are required.', 'err');
+      return;
+    }
+    let imageData = pendingImageData;
+    const imageUrl = imageUrlInput.value.trim();
+    if (!imageData && imageUrl) imageData = imageUrl;
+
+    const fields = {
+      name: name,
+      holder: holder,
+      date: dateInput.value || null,
+      video: videoInput.value.trim() || null,
+      imageUrl: imageUrl || null,
+      imageData: imageData || null
+    };
+
+    submitBtn.disabled = true;
+    setStatus('Saving…');
+
+    try {
+      // Insert at the requested position, bumping everything at/after it down
+      // one spot (this also closes any gap left behind if we're moving an
+      // existing entry). Firestore doc IDs are used as the stable identity.
+      const entryId = editingId || doc(beatsCol).id;
+      const others = beats.filter(function(b){ return String(b.id) !== String(entryId); });
+      others.sort(function(a,b){ return (a.position||0) - (b.position||0); });
+      let idx = position - 1;
+      if (idx < 0) idx = 0;
+      if (idx > others.length) idx = others.length;
+      others.splice(idx, 0, Object.assign({ id: entryId }, fields));
+      others.forEach(function(b, i){ b.position = i + 1; });
+
+      const batch = writeBatch(db);
+      others.forEach(function(b) {
+        const ref = doc(db, 'beats', b.id);
+        batch.set(ref, {
+          name: b.name, holder: b.holder, position: b.position,
+          date: b.date, video: b.video, imageUrl: b.imageUrl, imageData: b.imageData
+        });
+      });
+      await batch.commit();
+
+      setStatus(editingId ? 'Updated!' : 'Added!', 'ok');
+      resetForm();
+    } catch (err) {
+      console.error('save failed', err);
+      setStatus('Save failed: ' + err.message, 'err');
+    }
+    submitBtn.disabled = false;
+  });
+</script>
